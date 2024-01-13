@@ -1,0 +1,15 @@
+.elements__like-button {
+  align-self: center;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/Group-min.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.elements__like-button:hover {
+  opacity: 50%;
+}

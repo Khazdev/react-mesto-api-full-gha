@@ -1,0 +1,16 @@
+.popup__input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #00000033;
+  box-shadow: none;
+  max-width: 358px;
+  width: 100%;
+  color: #000;
+  font-size: 14px;
+  padding-bottom: 10px;
+  line-height: normal;
+}
+
+.popup__input:focus-visible {
+  outline: none;
+}

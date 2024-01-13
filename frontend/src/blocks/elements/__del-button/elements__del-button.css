@@ -1,0 +1,14 @@
+.elements__del-button {
+  width: 18px;
+  height: 19px;
+  background-image: url(../../../images/del-button.svg);
+  padding: 0;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 0;
+  background-color: transparent;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}

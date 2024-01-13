@@ -1,0 +1,23 @@
+.authorization__input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  box-shadow: none;
+  max-width: 358px;
+  width: 100%;
+  color: #fff;
+  font-size: 14px;
+  padding-bottom: 13px;
+  line-height: normal;
+}
+
+
+.authorization__input::placeholder {
+  color: #ccc;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.authorization__input:focus-visible {
+  outline: none;
+}

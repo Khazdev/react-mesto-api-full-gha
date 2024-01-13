@@ -1,0 +1,21 @@
+.header__logo {
+  display: block;
+  object-fit: fill;
+  width: 142px;
+  margin: 45px 0 41px;
+}
+
+@media screen and (max-width: 990px) {
+  .header__logo {
+    margin-left: 8.5%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header__logo {
+    width: 104px;
+    height: 24.4px;
+    margin-top: 28px;
+    margin-bottom: 31px;
+  }
+}

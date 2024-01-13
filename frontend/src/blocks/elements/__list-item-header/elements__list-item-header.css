@@ -1,0 +1,11 @@
+.elements__list-item-header {
+  margin: 0;
+  color: #000;
+  font-size: 24px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: normal;
+  max-width: 200px;
+}

@@ -1,0 +1,8 @@
+.authorization__sign-in-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.authorization__sign-in-link:hover {
+  opacity: 0.6;
+}
