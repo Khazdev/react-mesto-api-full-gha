@@ -6,7 +6,15 @@ class Api {
   }
 
   _request(uri, options) {
-    return fetch(this.baseurl + uri, options).then(this._checkResponse);
+    const updatedOptions = {
+      ...options,
+      headers: {
+        ...options.headers,
+        'jwt': `${localStorage.getItem('jwt')}`
+      }
+    };
+
+    return fetch(this.baseurl + uri, updatedOptions).then(this._checkResponse);
   }
 
   getInitialCards() {
@@ -53,7 +61,7 @@ class Api {
   _likeCard(id) {
     return this._request(`/cards/${id}/likes`, {
       method: "PUT",
-      headers: this.headers,
+      headers: { 'jwt': `${localStorage.getItem('jwt')}`, ...this.headers },
     });
   }
 
@@ -90,6 +98,5 @@ export const api = new Api({
   baseUrl: "https://api.mesto.khazanov.nomoredomainsmonster.ru",
   headers: {
     "Content-Type": "application/json",
-     'jwt': `${localStorage.getItem('jwt')}`,
   },
 });
