@@ -80,9 +80,9 @@ function App() {
       });
   };
 
-  const handleSignUp = (email, password) => {
-    authApi.signUp(email, password)
-      .then((res) => {
+  const handleSignUp = async (email, password) => {
+    await authApi.signUp(email, password)
+      .then(() => {
         setIsSuccessInfoTooltipStatus(true);
         setInfoTooltipMessage(SUCCESS_MESSAGE)
         openInfoTooltip();
@@ -103,8 +103,8 @@ function App() {
     setIsInfoTooltipPopupOpen(true);
   }
 
-  const handleSignIn = (email, password) => {
-    authApi.signIn(email, password)
+  const handleSignIn = async (email, password) => {
+    await authApi.signIn(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setEmail(email);
