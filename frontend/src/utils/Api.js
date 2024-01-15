@@ -90,5 +90,6 @@ export const api = new Api({
   baseUrl: "https://api.mesto.khazanov.nomoredomainsmonster.ru",
   headers: {
     "Content-Type": "application/json",
+     'jwt': `${localStorage.getItem('jwt')}`,
   },
 });

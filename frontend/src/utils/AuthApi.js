@@ -43,14 +43,14 @@ class AuthApi {
       method: "GET",
       headers: {
         ...this.headers,
-        "Authorization": `Bearer ${jwt}`
+        'jwt': jwt,
       },
     });
   }
 }
 
 export const authApi = new AuthApi({
-  baseUrl: "https://api.mesto.khazanov.nomoredomainsmonster.ru",
+  baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

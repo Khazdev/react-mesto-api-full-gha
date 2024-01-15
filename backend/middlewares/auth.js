@@ -3,11 +3,7 @@ const NotAuthorizedError = require('../errors/NotAuthorizedError');
 const config = require('../config');
 
 module.exports = (req, res, next) => {
-  const cookies = req.headers.cookie;
-  let token;
-  if (cookies) {
-    token = cookies.replace('jwt=', '');
-  }
+  const token = req.headers.jwt;
 
   if (!token) {
     return next(new NotAuthorizedError('Требуется авторизация'));

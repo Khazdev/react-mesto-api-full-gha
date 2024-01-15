@@ -9,6 +9,7 @@ const config = require('./config');
 const rootRouter = require('./routes/index');
 const authorization = require('./routes/authorization');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
+app.use(cors);
 app.use(authorization);
 app.use(auth);
 app.use(rootRouter);

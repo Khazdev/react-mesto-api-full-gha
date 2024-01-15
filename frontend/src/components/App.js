@@ -124,7 +124,7 @@ function App() {
     if (jwt) {
       authApi.validToken(jwt)
         .then((res) => {
-          setEmail(res.data.email)
+          setEmail(res.email)
           localStorage.setItem('loggedIn', "true")
           setIsLoggedIn(true)
           navigate('/', {replace: true})
@@ -195,7 +195,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner === currentUser._id;
     if (isOwn) {
       api
         .deleteCard(card._id)
