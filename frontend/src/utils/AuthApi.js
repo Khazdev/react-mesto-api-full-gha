@@ -50,7 +50,7 @@ class AuthApi {
 }
 
 export const authApi = new AuthApi({
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.mesto.khazanov.nomoredomainsmonster.ru",
   headers: {
     "Content-Type": "application/json",
   },
