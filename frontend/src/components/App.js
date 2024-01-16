@@ -50,6 +50,7 @@ function App() {
       api
         .getUserInfo()
         .then((response) => {
+          setEmail(response.email)
           setCurrentUser(response);
         })
         .catch((error) => console.log(error));
@@ -122,7 +123,7 @@ function App() {
 
   const handleValidateToken = () => {
     const jwt = localStorage.getItem("jwt");
-    if (jwt) {
+    if (jwt && !isLoggedIn) {
       authApi.validToken(jwt)
         .then((res) => {
           setEmail(res.email)

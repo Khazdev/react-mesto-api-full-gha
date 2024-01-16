@@ -109,7 +109,6 @@ module.exports.login = (req, res, next) => {
             {
               httpOnly: true,
               maxAge: 7 * 24 * 60 * 60 * 1000,
-              sameSite: true,
             },
           )
             .send({ message: 'Авторизация прошла успешно', token });

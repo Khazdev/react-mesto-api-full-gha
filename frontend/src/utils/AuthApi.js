@@ -42,8 +42,8 @@ class AuthApi {
     return this._request(`/users/me`, {
       method: "GET",
       headers: {
-        ...this.headers,
-        'jwt': jwt,
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${jwt}`,
       },
     });
   }

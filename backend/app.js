@@ -3,12 +3,10 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const auth = require('./middlewares/auth');
 const errorsHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/NotFoundError');
 const config = require('./config');
 const rootRouter = require('./routes/index');
-const authorization = require('./routes/authorization');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
@@ -25,12 +23,10 @@ mongoose
 app.use(helmet());
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use(cors);
-app.use(authorization);
-app.use(auth);
+app.use(cookieParser());
 app.use(rootRouter);
 app.use('*', () => {
   throw new NotFoundError('Здесь ничего нет :)');

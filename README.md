@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.130.148
+IP 158.160.130.148
 
-Frontend [https://...](https://mesto.khazanov.nomoredomainsmonster.ru/)https://mesto.khazanov.nomoredomainsmonster.ru/
+Frontend https://mesto.khazanov.nomoredomainsmonster.ru/
 
-Backend [https://...](https://api.mesto.khazanov.nomoredomainsmonster.ru/)https://mesto.khazanov.nomoredomainsmonster.ru/
+Backend https://api.mesto.khazanov.nomoredomainsmonster.ru/

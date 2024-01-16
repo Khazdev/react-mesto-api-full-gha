@@ -9,10 +9,10 @@ class Api {
     const updatedOptions = {
       ...options,
       headers: {
-        ...options.headers
-      }
+        ...options.headers,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      },
     };
-
     return fetch(this.baseurl + uri, updatedOptions).then(this._checkResponse);
   }
 
@@ -34,6 +34,7 @@ class Api {
     return this._request(`/users/me`, {
       method: "PATCH",
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         about: about,
@@ -72,6 +73,7 @@ class Api {
     return this._request(`/cards/${id}/likes`, {
       method: "DELETE",
       headers: this.headers,
+      credentials: 'include',
     });
   }
 
@@ -83,6 +85,7 @@ class Api {
     return this._request(`/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: avatarLink,
       }),
