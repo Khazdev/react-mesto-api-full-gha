@@ -106,7 +106,8 @@ function App() {
   const handleSignIn = async (email, password) => {
     await authApi.signIn(email, password)
       .then((res) => {
-        localStorage.setItem("jwt", res.token);
+        const jwt = res.token;
+        localStorage.setItem('jwt', jwt)
         setEmail(email);
         setIsLoggedIn(true)
         navigate('/')

@@ -6,18 +6,27 @@ class Api {
   }
 
   _request(uri, options) {
-    return fetch(this.baseurl + uri, options).then(this._checkResponse);
+    const updatedOptions = {
+      ...options,
+      headers: {
+        ...options.headers
+      }
+    };
+
+    return fetch(this.baseurl + uri, updatedOptions).then(this._checkResponse);
   }
 
   getInitialCards() {
     return this._request(`/cards`, {
       headers: this.headers,
+      credentials: 'include'
     });
   }
 
   getUserInfo() {
     return this._request(`/users/me`, {
       headers: this.headers,
+      credentials: 'include'
     });
   }
 
@@ -35,6 +44,7 @@ class Api {
   addCard(name, link) {
     return this._request(`/cards`, {
       method: "POST",
+      credentials: 'include',
       headers: this.headers,
       body: JSON.stringify({
         name: name,
@@ -46,6 +56,7 @@ class Api {
   deleteCard(id) {
     return this._request(`/cards/${id}`, {
       method: "DELETE",
+      credentials: 'include',
       headers: this.headers,
     });
   }
@@ -53,7 +64,7 @@ class Api {
   _likeCard(id) {
     return this._request(`/cards/${id}/likes`, {
       method: "PUT",
-      headers: this.headers,
+      credentials: 'include',
     });
   }
 
@@ -90,6 +101,5 @@ export const api = new Api({
   baseUrl: "https://api.mesto.khazanov.nomoredomainsmonster.ru",
   headers: {
     "Content-Type": "application/json",
-     'jwt': `${localStorage.getItem('jwt')}`,
   },
 });

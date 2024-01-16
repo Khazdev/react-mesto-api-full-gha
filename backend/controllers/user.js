@@ -103,7 +103,15 @@ module.exports.login = (req, res, next) => {
             return next(new NotAuthorizedError('Неправильные почта или пароль'));
           }
           const token = jwt.sign({ _id: user._id }, config.jwtSecret, { expiresIn: '7d' });
-          return res.cookie('jwt', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 })
+          return res.cookie(
+            'jwt',
+            token,
+            {
+              httpOnly: true,
+              maxAge: 7 * 24 * 60 * 60 * 1000,
+              sameSite: true,
+            },
+          )
             .send({ message: 'Авторизация прошла успешно', token });
         });
     })
