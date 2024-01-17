@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const errorsHandler = require('./middlewares/errorHandler');
-const NotFoundError = require('./errors/NotFoundError');
 const config = require('./config');
 const rootRouter = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -28,9 +27,6 @@ app.use(requestLogger);
 app.use(cors);
 app.use(cookieParser());
 app.use(rootRouter);
-app.use('*', () => {
-  throw new NotFoundError('Здесь ничего нет :)');
-});
 app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);

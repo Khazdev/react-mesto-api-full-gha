@@ -51,7 +51,7 @@ module.exports.createUser = (req, res, next) => {
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send(users))
-    .catch((err) => next(err));
+    .catch((err) => handleErrors(err, next));
 };
 
 module.exports.getUser = (req, res, next) => {
@@ -122,5 +122,5 @@ module.exports.getCurrentUser = (req, res, next) => {
     .then((user) => {
       res.send(user);
     })
-    .catch((err) => next(err));
+    .catch((err) => handleErrors(err, next));
 };

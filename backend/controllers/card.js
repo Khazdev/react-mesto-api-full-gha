@@ -13,8 +13,9 @@ module.exports.createCard = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -24,16 +25,27 @@ module.exports.getCards = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+const findAndDeleteCard = (cardId, userId) => Card.findOne({ _id: cardId })
+  .orFail(new NotFoundError('Карточка не найдена'))
+  .then(async (card) => {
+    if (card.owner.toString() !== userId.toString()) {
+      throw new ForbiddenError('У вас нет прав на удаление этой карточки');
+    }
+    return card.deleteOne();
+  });
+
+const updateCardLikes = (cardId, userId, updateData) => Card.findByIdAndUpdate(
+  cardId,
+  updateData,
+  { new: true },
+)
+  .populate([{ path: 'likes', model: 'user' }])
+  .orFail(new NotFoundError('Карточка не найдена'));
+
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.findOne({ _id: cardId })
-    .orFail(new NotFoundError('Карточка не найдена'))
-    .then(async (card) => {
-      if (card.owner.toString() !== req.user._id.toString()) {
-        throw new ForbiddenError('У вас нет прав на удаление этой карточки');
-      }
-      await card.deleteOne();
-    }).then(() => res.send({ message: 'Карточка удалена' }))
+  findAndDeleteCard(cardId, req.user._id)
+    .then(() => res.send({ message: 'Карточка удалена' }))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Пользователь не найден'));
@@ -43,13 +55,7 @@ module.exports.deleteCard = (req, res, next) => {
 
 module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.findByIdAndUpdate(
-    cardId,
-    { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
-    { new: true },
-  )
-    .populate([{ path: 'likes', model: 'user' }])
-    .orFail(new NotFoundError('Карточка не найдена'))
+  updateCardLikes(cardId, req.user._id, { $addToSet: { likes: req.user._id } })
     .then((updatedCard) => res.send(updatedCard))
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -60,13 +66,7 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.findByIdAndUpdate(
-    cardId,
-    { $pull: { likes: req.user._id } }, // убрать _id из массива
-    { new: true },
-  )
-    .populate([{ path: 'likes', model: 'user' }])
-    .orFail(new NotFoundError('Карточка не найдена'))
+  updateCardLikes(cardId, req.user._id, { $pull: { likes: req.user._id } })
     .then((updatedCard) => res.send(updatedCard))
     .catch((err) => {
       if (err.name === 'CastError') {
